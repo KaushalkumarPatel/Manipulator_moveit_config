@@ -1,0 +1,39 @@
+<launch>
+
+  <rosparam command="load" file="$(find demo_moveit_config)/config/joint_names.yaml"/>
+
+  <include file="$(find demo_moveit_config)/launch/planning_context.launch" >
+    <arg name="load_robot_description" value="true" />
+  </include>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="/source_list">[/joint_states]</rosparam>
+  </node>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+  <include file="$(find demo_moveit_config)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+
+  <include file="$(find demo_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster3" args="0 0 0 0 0 0 1 arm_6_link pg70_palm_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster4" args="0 0 0.7 0 0 0 1 base_link arm_podest_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster5" args="0.15 0 0.705 0 -0.3 0 base_link camera_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster6" args="0 0 0 0 0 0 1 world base_link 100" />
+
+</launch>
+
+
+
+  <!--node pkg="tf" type="static_transform_publisher" name="camera_broadcaster6" args="0 0 0 0 0 0 1 world camera_infra1_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster7" args="0 0 0 0 0 0 1 world camera_aligned_depth_to_infra1_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster8" args="0 0 0 0 0 0 1 world camera_infra1_optical_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster9" args="0 0 0 0 0 0 1 world camera_infra2_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster10" args="0 0 0 0 0 0 1 world camera_aligned_depth_to_infra2_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster11" args="0 0 0 0 0 0 1 world camera_infra2_optical_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster12" args="0 0 0 0 0 0 1 world camera_link 100" /-->
