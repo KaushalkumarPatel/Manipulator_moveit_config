@@ -1,5 +1,3 @@
-# we are in main banch
-
 #!/usr/bin/env python
 import rospy
 import sys
