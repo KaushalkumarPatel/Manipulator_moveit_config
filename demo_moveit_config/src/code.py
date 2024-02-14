@@ -1,5 +1,3 @@
-# This is main branch
-
 #!/usr/bin/env python
 import rospy
 import sys
