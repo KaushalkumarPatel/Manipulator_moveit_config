@@ -1,4 +1,4 @@
-# we are in branch_1
+# we are in main banch
 
 #!/usr/bin/env python
 import rospy
